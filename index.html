@@ -4,51 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mohammed Walid Mohammed — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --card: #16161f;
-    --border: #2a2a3a;
-    --accent: #6ee7f7;
-    --accent2: #a78bfa;
-    --accent3: #34d399;
-    --text: #e8e8f0;
-    --muted: #7070a0;
-    --glow: rgba(110, 231, 247, 0.15);
+    --bg: #f4f6fb;
+    --surface: #ffffff;
+    --card: #ffffff;
+    --border: #dde2f0;
+    --accent: #2563eb;
+    --accent2: #7c3aed;
+    --accent3: #059669;
+    --text: #0f172a;
+    --muted: #475569;
+    --light: #e8edf8;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     background: var(--bg);
     color: var(--text);
     overflow-x: hidden;
   }
 
-  /* Noise overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9997;
-    opacity: 0.4;
-  }
-
-  /* Grid lines */
+  /* subtle grid */
   body::after {
     content: '';
     position: fixed;
     inset: 0;
-    background-image: 
-      linear-gradient(rgba(110,231,247,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(110,231,247,0.03) 1px, transparent 1px);
+    background-image:
+      linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
     background-size: 60px 60px;
     pointer-events: none;
     z-index: 0;
@@ -59,20 +47,20 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    padding: 20px 60px;
+    padding: 18px 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    background: rgba(10,10,15,0.7);
+    background: rgba(244,246,251,0.85);
   }
 
   .nav-logo {
     font-size: 18px;
     font-weight: 800;
-    letter-spacing: -0.5px;
     color: var(--accent);
+    letter-spacing: -0.5px;
   }
 
   .nav-links {
@@ -82,7 +70,7 @@
   }
 
   .nav-links a {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
     color: var(--muted);
     text-decoration: none;
@@ -103,50 +91,74 @@
     overflow: hidden;
   }
 
-  .hero-glow {
+  .hero-blob {
     position: absolute;
-    width: 600px; height: 600px;
+    width: 700px; height: 700px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(110,231,247,0.08), transparent 70%);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(37,99,235,0.07), transparent 70%);
+    top: 50%; right: -100px;
+    transform: translateY(-50%);
     pointer-events: none;
   }
 
-  .hero-glow2 {
+  .hero-blob2 {
     position: absolute;
     width: 400px; height: 400px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(167,139,250,0.06), transparent 70%);
-    top: 20%; right: 10%;
+    background: radial-gradient(circle, rgba(124,58,237,0.05), transparent 70%);
+    bottom: 10%; left: 20%;
     pointer-events: none;
   }
 
   .hero-content {
-    max-width: 900px;
+    max-width: 820px;
     position: relative;
     z-index: 1;
   }
 
-  .hero-tag {
-    font-family: 'DM Mono', monospace;
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid rgba(5,150,105,0.25);
+    background: rgba(5,150,105,0.07);
+    margin-bottom: 28px;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
+    color: var(--accent3);
+    border-radius: 2px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.1s forwards;
+  }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent3);
+    animation: pulse 2s ease infinite;
+  }
+
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
     color: var(--accent);
     letter-spacing: 3px;
     text-transform: uppercase;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     opacity: 0;
-    animation: fadeUp 0.8s ease 0.2s forwards;
+    animation: fadeUp 0.7s ease 0.25s forwards;
   }
 
   .hero-name {
-    font-size: clamp(52px, 8vw, 96px);
+    font-size: clamp(52px, 7.5vw, 92px);
     font-weight: 800;
-    line-height: 0.95;
+    line-height: 0.96;
     letter-spacing: -3px;
-    margin-bottom: 24px;
+    color: var(--text);
+    margin-bottom: 22px;
     opacity: 0;
-    animation: fadeUp 0.8s ease 0.4s forwards;
+    animation: fadeUp 0.7s ease 0.4s forwards;
   }
 
   .hero-name span {
@@ -158,104 +170,77 @@
   }
 
   .hero-desc {
-    font-size: 18px;
+    font-size: 17px;
     color: var(--muted);
-    max-width: 520px;
-    line-height: 1.7;
-    margin-bottom: 48px;
-    font-weight: 400;
+    max-width: 500px;
+    line-height: 1.75;
+    margin-bottom: 44px;
+    font-weight: 500;
     opacity: 0;
-    animation: fadeUp 0.8s ease 0.6s forwards;
+    animation: fadeUp 0.7s ease 0.55s forwards;
   }
 
   .hero-cta {
     display: flex;
-    gap: 20px;
+    gap: 16px;
     flex-wrap: wrap;
     opacity: 0;
-    animation: fadeUp 0.8s ease 0.8s forwards;
+    animation: fadeUp 0.7s ease 0.7s forwards;
   }
 
   .btn-primary {
     padding: 14px 32px;
     background: var(--accent);
-    color: var(--bg);
+    color: #fff;
     text-decoration: none;
     font-weight: 700;
     font-size: 14px;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
     transition: all 0.3s;
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    border-radius: 2px;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.25);
   }
 
   .btn-primary:hover {
-    background: #a5f3fc;
+    background: #1d4ed8;
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(110,231,247,0.3);
+    box-shadow: 0 8px 28px rgba(37,99,235,0.35);
   }
 
   .btn-outline {
     padding: 14px 32px;
-    border: 1px solid var(--border);
+    border: 1.5px solid var(--border);
     color: var(--text);
     text-decoration: none;
     font-weight: 600;
     font-size: 14px;
-    letter-spacing: 0.5px;
     transition: all 0.3s;
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    border-radius: 2px;
   }
 
   .btn-outline:hover {
     border-color: var(--accent);
     color: var(--accent);
-    box-shadow: 0 0 24px rgba(110,231,247,0.1);
   }
 
   .hero-scroll {
     position: absolute;
-    bottom: 40px;
-    left: 60px;
+    bottom: 40px; left: 60px;
     display: flex;
     align-items: center;
     gap: 12px;
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: var(--muted);
     letter-spacing: 2px;
     text-transform: uppercase;
     opacity: 0;
-    animation: fadeUp 0.8s ease 1.2s forwards;
+    animation: fadeUp 0.7s ease 1s forwards;
   }
 
   .scroll-line {
-    width: 40px;
-    height: 1px;
+    width: 40px; height: 1px;
     background: var(--muted);
-    animation: expandLine 2s ease 1.5s infinite;
-  }
-
-  /* STATUS BADGE */
-  .status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border: 1px solid rgba(52,211,153,0.3);
-    background: rgba(52,211,153,0.05);
-    margin-bottom: 32px;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--accent3);
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.1s forwards;
-  }
-
-  .status-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent3);
-    animation: pulse 2s ease infinite;
   }
 
   /* SECTIONS */
@@ -266,12 +251,12 @@
   }
 
   .section-label {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: var(--accent);
     letter-spacing: 4px;
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -279,19 +264,25 @@
 
   .section-label::after {
     content: '';
-    flex: 1;
-    max-width: 60px;
-    height: 1px;
+    width: 50px; height: 1px;
     background: var(--accent);
     opacity: 0.4;
   }
 
   .section-title {
-    font-size: clamp(36px, 5vw, 64px);
+    font-size: clamp(34px, 4.5vw, 60px);
     font-weight: 800;
     letter-spacing: -2px;
     line-height: 1;
-    margin-bottom: 60px;
+    margin-bottom: 56px;
+    color: var(--text);
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0 60px;
   }
 
   /* ABOUT */
@@ -306,18 +297,16 @@
     color: var(--muted);
     line-height: 1.8;
     font-size: 16px;
-    margin-bottom: 20px;
-    font-weight: 400;
+    margin-bottom: 18px;
+    font-weight: 500;
   }
 
-  .about-text p strong {
-    color: var(--text);
-  }
+  .about-text p strong { color: var(--text); }
 
   .about-stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 16px;
   }
 
   .stat-card {
@@ -327,20 +316,22 @@
     position: relative;
     overflow: hidden;
     transition: all 0.3s;
+    border-radius: 4px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
   }
 
   .stat-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0;
-    width: 100%; height: 2px;
+    width: 100%; height: 3px;
     background: linear-gradient(90deg, var(--accent), transparent);
   }
 
   .stat-card:hover {
-    border-color: rgba(110,231,247,0.3);
+    border-color: rgba(37,99,235,0.3);
     transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    box-shadow: 0 12px 40px rgba(37,99,235,0.1);
   }
 
   .stat-number {
@@ -353,14 +344,14 @@
   }
 
   .stat-label {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: var(--muted);
     letter-spacing: 1px;
     text-transform: uppercase;
   }
 
-  /* EXPERIENCE */
+  /* TIMELINE */
   .timeline {
     position: relative;
     padding-left: 40px;
@@ -369,16 +360,14 @@
   .timeline::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 8px;
-    bottom: 0;
-    width: 1px;
+    left: 0; top: 8px; bottom: 0;
+    width: 2px;
     background: linear-gradient(to bottom, var(--accent), transparent);
   }
 
   .timeline-item {
     position: relative;
-    margin-bottom: 60px;
+    margin-bottom: 56px;
     opacity: 0;
     transform: translateX(-20px);
     transition: all 0.6s ease;
@@ -391,16 +380,15 @@
 
   .timeline-dot {
     position: absolute;
-    left: -46px;
-    top: 6px;
-    width: 12px; height: 12px;
+    left: -46px; top: 6px;
+    width: 13px; height: 13px;
     border-radius: 50%;
     background: var(--accent);
-    box-shadow: 0 0 16px var(--accent);
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
   }
 
   .timeline-period {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: var(--accent);
     letter-spacing: 2px;
@@ -411,14 +399,15 @@
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 4px;
+    color: var(--text);
     letter-spacing: -0.5px;
   }
 
   .timeline-company {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 13px;
     color: var(--muted);
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
 
   .timeline-bullets {
@@ -430,11 +419,11 @@
 
   .timeline-bullets li {
     color: var(--muted);
-    font-size: 14px;
-    line-height: 1.6;
-    padding-left: 16px;
+    font-size: 15px;
+    line-height: 1.65;
+    padding-left: 18px;
     position: relative;
-    font-weight: 400;
+    font-weight: 500;
   }
 
   .timeline-bullets li::before {
@@ -449,47 +438,35 @@
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
+    gap: 20px;
   }
 
   .skill-group {
     background: var(--card);
     border: 1px solid var(--border);
-    padding: 32px;
-    position: relative;
-    overflow: hidden;
+    padding: 28px;
+    border-radius: 4px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
     transition: all 0.3s;
   }
 
-  .skill-group::after {
-    content: '';
-    position: absolute;
-    bottom: 0; right: 0;
-    width: 80px; height: 80px;
-    background: radial-gradient(circle, rgba(110,231,247,0.05), transparent);
-    pointer-events: none;
-  }
-
   .skill-group:hover {
-    border-color: rgba(110,231,247,0.25);
+    border-color: rgba(37,99,235,0.3);
     transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    box-shadow: 0 12px 40px rgba(37,99,235,0.08);
   }
 
   .skill-group-title {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: var(--accent);
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     display: flex;
     align-items: center;
     gap: 8px;
-  }
-
-  .skill-group-icon {
-    font-size: 18px;
+    font-weight: 500;
   }
 
   .skill-tags {
@@ -500,18 +477,19 @@
 
   .skill-tag {
     padding: 5px 12px;
-    background: rgba(110,231,247,0.06);
-    border: 1px solid rgba(110,231,247,0.12);
-    font-family: 'DM Mono', monospace;
+    background: var(--light);
+    border: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: var(--text);
-    letter-spacing: 0.5px;
+    border-radius: 2px;
     transition: all 0.2s;
+    font-weight: 500;
   }
 
   .skill-tag:hover {
-    background: rgba(110,231,247,0.12);
-    border-color: rgba(110,231,247,0.3);
+    background: rgba(37,99,235,0.08);
+    border-color: rgba(37,99,235,0.3);
     color: var(--accent);
   }
 
@@ -519,14 +497,16 @@
   .project-card {
     background: var(--card);
     border: 1px solid var(--border);
-    padding: 48px;
+    padding: 44px;
+    display: flex;
+    gap: 48px;
+    align-items: center;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
     position: relative;
     overflow: hidden;
-    transition: all 0.4s;
-    display: flex;
-    gap: 60px;
-    align-items: center;
-    margin-bottom: 24px;
+    transition: all 0.3s;
   }
 
   .project-card::before {
@@ -538,19 +518,18 @@
   }
 
   .project-card:hover {
-    border-color: rgba(110,231,247,0.2);
-    transform: translateX(8px);
-    box-shadow: -8px 0 48px rgba(110,231,247,0.05);
+    border-color: rgba(37,99,235,0.25);
+    transform: translateX(6px);
+    box-shadow: -6px 0 40px rgba(37,99,235,0.07);
   }
 
   .project-number {
-    font-size: 80px;
+    font-size: 72px;
     font-weight: 800;
-    color: rgba(110,231,247,0.06);
+    color: rgba(37,99,235,0.07);
     letter-spacing: -4px;
     line-height: 1;
     flex-shrink: 0;
-    font-variant-numeric: tabular-nums;
   }
 
   .project-content { flex: 1; }
@@ -560,52 +539,58 @@
     align-items: center;
     gap: 6px;
     padding: 4px 12px;
-    background: rgba(167,139,250,0.1);
-    border: 1px solid rgba(167,139,250,0.2);
-    font-family: 'DM Mono', monospace;
+    background: rgba(124,58,237,0.07);
+    border: 1px solid rgba(124,58,237,0.2);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     color: var(--accent2);
     letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
+    border-radius: 2px;
   }
 
   .project-title {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 700;
     letter-spacing: -0.5px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    color: var(--text);
   }
 
   .project-desc {
     color: var(--muted);
     font-size: 15px;
     line-height: 1.7;
-    font-weight: 400;
+    font-weight: 500;
   }
 
   /* EDUCATION */
   .edu-card {
     background: var(--card);
     border: 1px solid var(--border);
-    padding: 48px;
+    padding: 44px;
     position: relative;
     overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
   }
 
   .edu-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 2px;
+    height: 3px;
     background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
   }
 
   .edu-institution {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 800;
-    letter-spacing: -1px;
-    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+    color: var(--text);
   }
 
   .edu-degree {
@@ -616,10 +601,10 @@
   }
 
   .edu-period {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
     color: var(--muted);
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 
   .edu-courses {
@@ -630,11 +615,69 @@
 
   .course-tag {
     padding: 6px 14px;
-    background: rgba(167,139,250,0.06);
-    border: 1px solid rgba(167,139,250,0.12);
-    font-family: 'DM Mono', monospace;
+    background: var(--light);
+    border: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: var(--muted);
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  /* INTERESTS */
+  .interests-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .interest-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 36px;
+    border-radius: 4px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .interest-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent2);
+  }
+
+  .interest-card:hover {
+    border-color: rgba(124,58,237,0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.07);
+  }
+
+  .interest-icon { font-size: 36px; margin-bottom: 16px; }
+
+  .interest-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .interest-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  .interest-desc {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+    font-weight: 500;
   }
 
   /* CONTACT */
@@ -646,27 +689,26 @@
   }
 
   .contact-tagline {
-    font-size: clamp(36px, 5vw, 56px);
+    font-size: clamp(34px, 4.5vw, 52px);
     font-weight: 800;
     letter-spacing: -2px;
     line-height: 1.05;
+    color: var(--text);
   }
 
-  .contact-tagline span {
-    color: var(--accent);
-  }
+  .contact-tagline span { color: var(--accent); }
 
   .contact-links {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
   }
 
   .contact-link {
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 20px 24px;
+    padding: 18px 22px;
     background: var(--card);
     border: 1px solid var(--border);
     text-decoration: none;
@@ -674,43 +716,48 @@
     transition: all 0.3s;
     font-weight: 600;
     font-size: 15px;
+    border-radius: 4px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
   }
 
   .contact-link:hover {
     border-color: var(--accent);
     color: var(--accent);
-    transform: translateX(8px);
+    transform: translateX(6px);
+    box-shadow: -4px 0 20px rgba(37,99,235,0.08);
   }
 
   .contact-icon {
     width: 40px; height: 40px;
-    background: rgba(110,231,247,0.08);
-    border: 1px solid rgba(110,231,247,0.15);
+    background: var(--light);
+    border: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 18px;
     flex-shrink: 0;
+    border-radius: 2px;
     transition: all 0.3s;
-  }
-
-  .contact-link:hover .contact-icon {
-    background: rgba(110,231,247,0.15);
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
   }
 
   /* FOOTER */
   footer {
-    padding: 32px 60px;
+    padding: 28px 60px;
     border-top: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
     z-index: 1;
+    background: var(--surface);
   }
 
   footer p {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: var(--muted);
     letter-spacing: 1px;
@@ -718,74 +765,28 @@
 
   /* ANIMATIONS */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
   @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
   }
-
-  @keyframes expandLine {
-    0%, 100% { width: 40px; opacity: 1; }
-    50% { width: 60px; opacity: 0.5; }
-  }
-
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border), transparent);
-    margin: 0 60px;
-  }
-
-  /* EXTRACURRICULAR */
-  .extra-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 36px 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 40px;
-    transition: all 0.3s;
-  }
-
-  .extra-card:hover {
-    border-color: rgba(167,139,250,0.3);
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
-  }
-
-  .extra-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--accent2);
-  }
-
-  .extra-card { position: relative; overflow: hidden; }
-
-  .extra-role { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-  .extra-org { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent2); margin-bottom: 16px; }
-  .extra-desc { color: var(--muted); font-size: 14px; line-height: 1.6; font-weight: 400; }
-  .extra-period { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); white-space: nowrap; }
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
     nav { padding: 16px 24px; }
     .nav-links { display: none; }
-    section { padding: 70px 24px; }
+    section { padding: 64px 24px; }
     .hero { padding: 100px 24px 60px; }
     .hero-scroll { left: 24px; }
-    .about-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
-    .project-card { flex-direction: column; gap: 20px; padding: 32px; }
+    .about-grid, .contact-wrapper, .interests-grid { grid-template-columns: 1fr; gap: 32px; }
+    .project-card { flex-direction: column; gap: 16px; padding: 28px; }
     .project-number { font-size: 48px; }
-    .extra-card { flex-direction: column; align-items: flex-start; }
-    footer { flex-direction: column; gap: 12px; padding: 24px; }
+    footer { flex-direction: column; gap: 10px; padding: 20px 24px; }
     .divider { margin: 0 24px; }
-    .hero-name { letter-spacing: -2px; }
-    .edu-card { padding: 32px; }
+    .edu-card { padding: 28px; }
   }
 </style>
 </head>
@@ -805,14 +806,14 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-glow2"></div>
+  <div class="hero-blob"></div>
+  <div class="hero-blob2"></div>
   <div class="hero-content">
     <div class="status-badge">
       <span class="status-dot"></span>
       Available for opportunities
     </div>
-    <div class="hero-tag">IT Specialist & Engineer</div>
+    <div class="hero-tag">IT Specialist &amp; Engineer</div>
     <h1 class="hero-name">
       Mohammed<br>
       <span>Walid</span>
@@ -839,15 +840,9 @@
   <h2 class="section-title">Who I Am</h2>
   <div class="about-grid">
     <div class="about-text">
-      <p>
-        I'm a <strong>Computer Engineering graduate</strong> from the American University of Sharjah with a deep passion for technology, problem-solving, and building systems that work.
-      </p>
-      <p>
-        Currently working as an <strong>IT Support Specialist at AUS</strong>, I manage everything from lab imaging with SCCM and Clonezilla, to network diagnostics, procurement training, and anti-cheating systems.
-      </p>
-      <p>
-        My background spans software development, cybersecurity, system administration, and team leadership — shaped by a senior design award, an internship, and two years leading a university club as president.
-      </p>
+      <p>I'm a <strong>Computer Engineering graduate</strong> from the American University of Sharjah with a deep passion for technology, problem-solving, and building systems that work.</p>
+      <p>Currently working as an <strong>IT Support Specialist at AUS</strong>, I manage everything from lab imaging with SCCM and Clonezilla, to network diagnostics, procurement training, and anti-cheating systems.</p>
+      <p>My background spans software development, cybersecurity, system administration, and team leadership — shaped by a senior design award, an internship, and a Master's degree on the horizon.</p>
     </div>
     <div class="about-stats">
       <div class="stat-card">
@@ -885,7 +880,7 @@
       <div class="timeline-company">American University of Sharjah · Sharjah, UAE</div>
       <ul class="timeline-bullets">
         <li>Provide technical support for students, faculty, and staff across academic, administrative, and classroom environments.</li>
-        <li>Image and build labs using SCCM & Clonezilla, ensuring readiness for academic use.</li>
+        <li>Image and build labs using SCCM &amp; Clonezilla, ensuring readiness for academic use.</li>
         <li>Networking troubleshooting including traffic analysis, connectivity diagnostics, and optimal performance.</li>
         <li>Deliver procurement and expense-related training sessions for new and current staff.</li>
         <li>Conduct technical evaluations and comparative analysis of IT equipment to support purchasing decisions.</li>
@@ -902,7 +897,7 @@
       <ul class="timeline-bullets">
         <li>Troubleshot and resolved hardware, software, and network issues ensuring minimal downtime.</li>
         <li>Managed user accounts, permissions, and security settings in Active Directory and enterprise systems.</li>
-        <li>Designed and launched the company's official website (mincomuae.com).</li>
+        <li>Helped in designing and contributed to launching the company's official website (mincomuae.com).</li>
         <li>Provided remote and on-site technical support for end-users across the organization.</li>
       </ul>
     </div>
@@ -918,7 +913,7 @@
   <h2 class="section-title">What I<br>Work With</h2>
   <div class="skills-grid">
     <div class="skill-group">
-      <div class="skill-group-title"><span class="skill-group-icon">⌨</span> Languages</div>
+      <div class="skill-group-title">⌨ Languages</div>
       <div class="skill-tags">
         <span class="skill-tag">Python</span>
         <span class="skill-tag">C++</span>
@@ -933,7 +928,7 @@
       </div>
     </div>
     <div class="skill-group">
-      <div class="skill-group-title"><span class="skill-group-icon">🖥</span> IT & Sysadmin</div>
+      <div class="skill-group-title">🖥 IT &amp; Sysadmin</div>
       <div class="skill-tags">
         <span class="skill-tag">Windows</span>
         <span class="skill-tag">Linux</span>
@@ -947,7 +942,7 @@
       </div>
     </div>
     <div class="skill-group">
-      <div class="skill-group-title"><span class="skill-group-icon">🔐</span> Security & Networking</div>
+      <div class="skill-group-title">🔐 Security &amp; Networking</div>
       <div class="skill-tags">
         <span class="skill-tag">Cybersecurity</span>
         <span class="skill-tag">Encryption</span>
@@ -957,7 +952,7 @@
       </div>
     </div>
     <div class="skill-group">
-      <div class="skill-group-title"><span class="skill-group-icon">🛠</span> Software & Tools</div>
+      <div class="skill-group-title">🛠 Software &amp; Tools</div>
       <div class="skill-tags">
         <span class="skill-tag">Office 365</span>
         <span class="skill-tag">Google Workspace</span>
@@ -968,7 +963,7 @@
       </div>
     </div>
     <div class="skill-group">
-      <div class="skill-group-title"><span class="skill-group-icon">🧠</span> CS Fundamentals</div>
+      <div class="skill-group-title">🧠 CS Fundamentals</div>
       <div class="skill-tags">
         <span class="skill-tag">Algorithms</span>
         <span class="skill-tag">Data Structures</span>
@@ -979,7 +974,7 @@
       </div>
     </div>
     <div class="skill-group">
-      <div class="skill-group-title"><span class="skill-group-icon">📋</span> Soft Skills</div>
+      <div class="skill-group-title">📋 Soft Skills</div>
       <div class="skill-tags">
         <span class="skill-tag">Project Management</span>
         <span class="skill-tag">Process Optimization</span>
@@ -1003,9 +998,7 @@
     <div class="project-content">
       <div class="project-award">🏆 3rd Place — Senior Design Competition</div>
       <div class="project-title">Facial Expression Learning Robot</div>
-      <p class="project-desc">
-        Secured 3rd place among 30+ competing projects in the AUS Senior Design Competition. Developed a robot capable of learning and imitating human facial expressions using computer vision and AI — blending hardware, software, and machine learning into a single intelligent system.
-      </p>
+      <p class="project-desc">Secured 3rd place among 30+ competing projects in the AUS Senior Design Competition. Developed a robot capable of learning and imitating human facial expressions using computer vision and AI — blending hardware, software, and machine learning into a single intelligent system.</p>
     </div>
   </div>
 
@@ -1014,9 +1007,7 @@
     <div class="project-content">
       <div class="project-award">🌐 Live Website</div>
       <div class="project-title">Mincom Trading LLC — Corporate Website</div>
-      <p class="project-desc">
-        Designed and developed the official corporate website for Mincom Trading LLC during my internship. The site is fully live at <strong>mincomuae.com</strong>, serving as the company's digital presence across the UAE.
-      </p>
+      <p class="project-desc">Helped in designing and contributed to the development of the official corporate website for Mincom Trading LLC during my internship. The site is fully live at <strong>mincomuae.com</strong>, serving as the company's digital presence across the UAE.</p>
     </div>
   </div>
 </section>
@@ -1027,12 +1018,19 @@
 <section>
   <div class="section-label">05 — Education</div>
   <h2 class="section-title">Academic<br>Background</h2>
+
+  <div class="edu-card">
+    <div class="edu-institution">American University of Sharjah</div>
+    <div class="edu-degree">M.Sc. in Business Data Analysis &nbsp;<span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#059669;background:rgba(5,150,105,0.08);border:1px solid rgba(5,150,105,0.2);padding:2px 10px;border-radius:2px;">Upcoming</span></div>
+    <div class="edu-period">AUG 2026 — PRESENT · Sharjah, UAE</div>
+  </div>
+
   <div class="edu-card">
     <div class="edu-institution">American University of Sharjah</div>
     <div class="edu-degree">B.Sc. in Computer Engineering</div>
     <div class="edu-period">AUG 2020 — DEC 2024 · Sharjah, UAE</div>
     <div class="edu-courses">
-      <span class="course-tag">Data Structures & Algorithms</span>
+      <span class="course-tag">Data Structures &amp; Algorithms</span>
       <span class="course-tag">Database Systems</span>
       <span class="course-tag">OOP Programming</span>
       <span class="course-tag">Computer Security</span>
@@ -1045,17 +1043,23 @@
 
 <div class="divider"></div>
 
-<!-- EXTRACURRICULAR -->
+<!-- INTERESTS -->
 <section>
-  <div class="section-label">06 — Leadership</div>
-  <h2 class="section-title">Beyond<br>the Desk</h2>
-  <div class="extra-card">
-    <div class="extra-main">
-      <div class="extra-role">President</div>
-      <div class="extra-org">AUS Jordanian Cultural Club</div>
-      <p class="extra-desc">Led the club for nearly two years, organizing cultural performances and large-scale events. Secured sponsorships from multiple companies, successfully funding and executing engaging cultural events for the university community.</p>
+  <div class="section-label">06 — Beyond the Desk</div>
+  <h2 class="section-title">Life Outside<br>Tech</h2>
+  <div class="interests-grid">
+    <div class="interest-card">
+      <div class="interest-icon">⚽</div>
+      <div class="interest-title">Football Fan</div>
+      <div class="interest-sub">Manchester United Supporter</div>
+      <p class="interest-desc">A passionate follower of the beautiful game and a proud Manchester United fan. Football is more than a sport — it's about teamwork, strategy, and the thrill of the match.</p>
     </div>
-    <div class="extra-period">SEP 2022 — JUN 2024</div>
+    <div class="interest-card">
+      <div class="interest-icon">🍳</div>
+      <div class="interest-title">Cooking Enthusiast</div>
+      <div class="interest-sub">Home Chef</div>
+      <p class="interest-desc">Cooking is a creative outlet — experimenting with flavors, trying new recipes, and enjoying the satisfaction of a great home-cooked meal. A love for food that goes beyond just eating it.</p>
+    </div>
   </div>
 </section>
 
@@ -1081,10 +1085,6 @@
         <div class="contact-icon">in</div>
         LinkedIn Profile
       </a>
-      <a href="#" class="contact-link">
-        <div class="contact-icon">📍</div>
-        Al-Majaz 3, Sharjah, UAE
-      </a>
     </div>
   </div>
 </section>
@@ -1095,25 +1095,23 @@
 </footer>
 
 <script>
-  // Scroll reveal for timeline items
+  // Scroll reveal for timeline
   const observer = new IntersectionObserver(entries => {
-    entries.forEach((entry, i) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, 100);
+        entry.target.classList.add('visible');
       }
     });
   }, { threshold: 0.2 });
 
   document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
 
-  // Parallax glow on hero
+  // Subtle parallax on hero blobs
   document.addEventListener('mousemove', e => {
-    const glow = document.querySelector('.hero-glow');
-    const x = (e.clientX / window.innerWidth - 0.5) * 40;
-    const y = (e.clientY / window.innerHeight - 0.5) * 40;
-    glow.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+    const blob = document.querySelector('.hero-blob');
+    const x = (e.clientX / window.innerWidth - 0.5) * 30;
+    const y = (e.clientY / window.innerHeight - 0.5) * 30;
+    if (blob) blob.style.transform = `translateY(calc(-50% + ${y}px)) translateX(${x}px)`;
   });
 </script>
 
